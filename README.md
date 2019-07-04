@@ -185,28 +185,11 @@ SELECT prodname, SUM(total) FROM product_sales GROUP BY prodname ORDER BY prodna
 
 **Install**  
 Download and install pgbouncer-rr by running the following commands (Amazon Linux/RHEL/CentOS):
+
 ```
-# install required packages
-sudo yum install libevent-devel openssl-devel python-devel libtool git patch make -y
-
-# download the latest pgbouncer distribution
-git clone https://github.com/pgbouncer/pgbouncer.git
-
-# download pgbouncer-rr extensions
-git clone https://github.com/awslabs/pgbouncer-rr-patch.git
-
-# merge pgbouncer-rr extensions into pgbouncer code
-cd pgbouncer-rr-patch
-./install-pgbouncer-rr-patch.sh ../pgbouncer
-
-# build and install
-cd ../pgbouncer
-git submodule init
-git submodule update
-./autogen.sh
-./configure ...
-make
-sudo make install
+docker build -t imranismail/pgbouncer-rr:latest .
+docker run --rm -it -v $(pwd):/tmp/pgbouncer-rr-patch imranismail/pgbouncer-rr make
+./release/pgbouncer -h
 ``` 
 
 **Configure**  

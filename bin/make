@@ -1,0 +1,8 @@
+#! /bin/sh
+
+mkdir -p release
+./install-pgbouncer-rr-patch.sh ../pgbouncer
+(cd ../pgbouncer && ./autogen.sh)
+(cd ../pgbouncer && ./configure)
+(cd ../pgbouncer && make)
+mv ../pgbouncer/pgbouncer ./release
